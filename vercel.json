@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api" },
+    { "source": "/checkout", "destination": "/site/checkout.html" },
+    { "source": "/checkout.html", "destination": "/site/checkout.html" },
+    { "source": "/membros", "destination": "/site/membros.html" },
+    { "source": "/membros.html", "destination": "/site/membros.html" },
+    { "source": "/auth", "destination": "/site/auth.html" },
+    { "source": "/auth.html", "destination": "/site/auth.html" },
+    { "source": "/ativar", "destination": "/site/ativar.html" },
+    { "source": "/ativar.html", "destination": "/site/ativar.html" },
+    { "source": "/criar-acesso", "destination": "/site/criar-acesso.html" },
+    { "source": "/criar-acesso.html", "destination": "/site/criar-acesso.html" },
+    { "source": "/extrair-prompt", "destination": "/site/extrair-prompt.html" },
+    { "source": "/extrair-prompt.html", "destination": "/site/extrair-prompt.html" },
+    { "source": "/admin", "destination": "/site/admin.html" },
+    { "source": "/admin.html", "destination": "/site/admin.html" },
+    { "source": "/", "destination": "/site/index.html" },
+    { "source": "/(.*)", "destination": "/site/$1" }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "provider": "syncpay",
+  "client_id": "3c672d63-bf75-46d1-a95b-8fcbb56251e7",
+  "client_secret": "e50654c1-3aba-49f0-a52c-ef966b4d0f0f",
+  "base_url": "https://api.syncpayments.com.br",
+  "webhook_url": "http://localhost:3030/api/webhook/syncpay",
+  "test_mode": false
+}

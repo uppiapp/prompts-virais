@@ -1,0 +1,52 @@
+[
+  {
+    "id": "usr_admin_1",
+    "name": "Administrador",
+    "email": "admin@vip.com",
+    "password": "admin",
+    "role": "admin",
+    "plan": "Administrador",
+    "status": "ativo",
+    "createdAt": "2026-09-25T12:00:00.000Z"
+  },
+  {
+    "id": "usr_aluno_demo",
+    "name": "Aluno VIP Demo",
+    "email": "aluno@vip.com",
+    "password": "123",
+    "role": "aluno",
+    "plan": "Vitalício",
+    "status": "ativo",
+    "createdAt": "2026-09-25T14:30:00.000Z"
+  },
+  {
+    "id": "usr_1790363711050",
+    "name": "dinho",
+    "email": "helobet7@gmail.com",
+    "password": "123456",
+    "role": "aluno",
+    "plan": "VIP Vitalício",
+    "status": "ativo",
+    "createdAt": "2026-09-25T19:15:11.050Z"
+  },
+  {
+    "id": "usr_1790364654580",
+    "name": "Aluno VIP",
+    "email": "novo.aluno@email.com",
+    "password": "PV-WV8EVS",
+    "role": "aluno",
+    "plan": "VIP Vitalício",
+    "status": "ativo",
+    "createdAt": "2026-09-25T19:30:54.580Z"
+  },
+  {
+    "id": "usr_1790364654589",
+    "name": "Cliente Webhook",
+    "email": "webhook.aluno@email.com",
+    "password": "PV-7ZMK3Q",
+    "role": "aluno",
+    "plan": "VIP Vitalício",
+    "status": "ativo",
+    "createdAt": "2026-09-25T19:30:54.589Z"
+  }
+]

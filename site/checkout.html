@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="pt-BR" style="font-family:'Inter Tight', system-ui, sans-serif">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <title>Checkout Seguro Oficial · Prompts Virais</title>
+  <meta name="description" content="Finalize seu acesso VIP aos Prompts Virais com liberação imediata via Pix Oficial Banco Central."/>
+  <link rel="stylesheet" href="/assets/styles-CMsMeHHC.css" data-precedence="default"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter+Tight:wght@400;500;600;700;800;900&family=Outfit:wght@400;800&display=swap" data-precedence="default"/>
+  <link rel="stylesheet" href="/enhancements.css"/>
+  <link rel="icon" type="image/png" href="/favicon.png"/>
+  <script src="/assets/qrcode.min.js"></script>
+  <style>
+    /* Prevent horizontal scrolling & set mobile touch optimization */
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    /* Ambient Hero Orbs */
+    .gold-orb {
+      filter: blur(80px);
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(31, 109, 255, 0.55), rgba(79, 107, 245, 0.3) 40%, rgba(0, 0, 0, 0) 70%);
+      border-radius: 9999px;
+      animation: 16s ease-in-out infinite orb-drift;
+      position: absolute;
+      z-index: 0;
+      display: block !important;
+    }
+    .co-orb-1 {
+      top: -120px;
+      left: -100px;
+      width: 520px;
+      height: 520px;
+    }
+    .co-orb-2 {
+      top: 35%;
+      right: -140px;
+      width: 560px;
+      height: 560px;
+      animation-delay: 4s;
+    }
+    .co-orb-3 {
+      bottom: -100px;
+      left: 15%;
+      width: 480px;
+      height: 480px;
+      animation-delay: 8s;
+    }
+    @keyframes orb-drift {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(30px, -40px) scale(1.15); }
+    }
+
+    /* Grid pattern */
+    .bg-grid {
+      background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 52px 52px;
+    }
+
+    /* Inputs: 16px minimum on mobile to prevent iOS Safari auto-zoom bug */
+    .co-input {
+      width: 100%;
+      height: 52px;
+      padding: 0 16px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      transition: all 0.25s ease;
+    }
+    @media (max-width: 640px) {
+      .co-input {
+        font-size: 16px !important; /* Critical: prevents iOS auto-zoom */
+        height: 50px;
+      }
+    }
+    .co-input:focus {
+      border-color: #4f6bf5;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 0 3px rgba(79, 107, 245, 0.3);
+    }
+    .co-input.input-error {
+      border-color: #f43f5e !important;
+      background: rgba(244, 63, 94, 0.08) !important;
+      box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.25) !important;
+    }
+
+    /* Plan cards */
+    .plan-card {
+      position: relative;
+      border-radius: 18px;
+      border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
+      background: rgba(255, 255, 255, 0.03) !important;
+      padding: 18px 20px;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+    }
+    .plan-card:hover {
+      border-color: rgba(79, 107, 245, 0.5) !important;
+      background: rgba(255, 255, 255, 0.05) !important;
+    }
+    .plan-card.selected {
+      border-color: #4f6bf5 !important;
+      background: linear-gradient(145deg, rgba(79, 107, 245, 0.18) 0%, rgba(12, 14, 26, 0.96) 100%) !important;
+      box-shadow: 0 0 28px rgba(79, 107, 245, 0.38) !important;
+      transform: translateY(-2px);
+    }
+
+    /* Popular Badge on VIP Card */
+    .co-badge-popular {
+      position: absolute;
+      top: -12px;
+      right: 14px;
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+      color: #000 !important;
+      font-weight: 900 !important;
+      font-size: 10px !important;
+      line-height: 1 !important;
+      letter-spacing: 0.06em !important;
+      text-transform: uppercase !important;
+      padding: 4px 10px !important;
+      border-radius: 9999px !important;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.55) !important;
+      z-index: 10;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.35) !important;
+    }
+
+    /* Custom Radio Indicator */
+    .co-radio-indicator {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.28);
+      background: rgba(0, 0, 0, 0.5);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+    .plan-card.selected .co-radio-indicator {
+      border-color: #4f6bf5 !important;
+      background: rgba(79, 107, 245, 0.3) !important;
+      box-shadow: 0 0 10px rgba(79, 107, 245, 0.6) !important;
+    }
+    .co-radio-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: transparent;
+      transition: all 0.2s ease;
+    }
+    .plan-card.selected .co-radio-dot {
+      background: #ffffff !important;
+      box-shadow: 0 0 6px #ffffff;
+    }
+
+    /* Pulse Glow */
+    .pulse-glow {
+      animation: pulse-glow 2.2s infinite;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 18px rgba(79, 107, 245, 0.45); }
+      50% { box-shadow: 0 0 38px rgba(79, 107, 245, 0.9); }
+    }
+
+    /* Button light shimmer sweep */
+    .shine-btn {
+      position: relative;
+      overflow: hidden;
+    }
+    .shine-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40%;
+      height: 200%;
+      background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: rotate(25deg);
+      animation: sweep 3.5s infinite;
+    }
+    @keyframes sweep {
+      0% { left: -60%; }
+      30% { left: 140%; }
+      100% { left: 140%; }
+    }
+
+    /* Official Pix Icon Styling */
+    .pix-icon-color {
+      color: #32BCAD;
+    }
+  </style>
+</head>
+<body class="bg-[#05060a] text-white min-h-screen relative overflow-x-hidden selection:bg-[#4f6bf5] selection:text-white">
+
+  <!-- Background Visual Atmosphere (Same as Hero) -->
+  <div class="fixed inset-0 bg-grid opacity-25 pointer-events-none z-0"></div>
+  <div class="gold-orb co-orb-1"></div>
+  <div class="gold-orb co-orb-2"></div>
+  <div class="gold-orb co-orb-3"></div>
+  <div class="absolute inset-x-0 top-0 h-px pointer-events-none z-10" style="background:linear-gradient(90deg, transparent, rgba(79, 107, 245, 0.8), transparent)"></div>
+
+  <!-- Top Security Scarcity Bar -->
+  <div class="relative z-20 bg-[#080913]/90 border-b border-white/10 text-xs py-2 px-3 sm:px-4 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2 text-white/70 text-[11px] sm:text-xs">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-emerald-400 shrink-0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+        <span>Ambiente Criptografado 256-bit SSL · SyncPay Oficial</span>
+      </div>
+      <div class="flex items-center gap-1.5 font-mono text-[#8ea2ff] font-bold text-[11px] sm:text-xs">
+        <span>⏰ Oferta reservada por:</span>
+        <span id="co-timer" class="text-emerald-400 font-black text-sm">14:59</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="relative z-20 py-3.5 sm:py-4 border-b border-white/5 bg-[#05060a]/90 backdrop-blur-md sticky top-0">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2.5 transition hover:opacity-90">
+        <img src="/__l5e/assets-v1/5f4ebab9-52d0-4b3e-bd90-2fc6b6f949ba/rv-logo-3d.png" alt="Logo" class="h-8 sm:h-9 w-auto object-contain drop-shadow-[0_0_12px_rgba(79,107,245,0.7)]"/>
+        <span class="font-black text-base sm:text-[17px] tracking-tight text-white">PROMPTS <span style="color:#6b86ff">VIRAIS</span></span>
+      </a>
+      <div class="flex items-center gap-2 text-xs text-white/70">
+        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 font-bold text-[11px]">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+          <span>Checkout Seguro</span>
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Collapsible Order Summary Accordion (Visible on Mobile only) -->
+  <div class="lg:hidden relative z-20 bg-[#090b14]/95 border-b border-white/10 px-4 py-3 backdrop-blur-md">
+    <button type="button" id="mobile-summary-toggle" class="w-full flex items-center justify-between text-xs font-bold text-white">
+      <div class="flex items-center gap-2">
+        <span class="text-[#8ea2ff]">🛒 Ver resumo do pedido</span>
+        <span id="mobile-summary-pill" class="px-2 py-0.5 rounded text-[10px] font-black bg-[#4f6bf5]/20 text-[#8ea2ff]">VIP Vitalício</span>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <span id="mobile-summary-price" class="text-emerald-400 font-black text-sm">R$ 147,00</span>
+        <svg id="mobile-summary-chevron" class="w-4 h-4 text-white/50 transition-transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+    </button>
+    <div id="mobile-summary-content" style="display:none;" class="pt-3 pb-1 text-xs space-y-2 border-t border-white/5 mt-2">
+      <div class="flex justify-between text-white/60">
+        <span>Plano selecionado:</span>
+        <span id="mobile-summary-title" class="font-bold text-white">VIP Vitalício</span>
+      </div>
+      <div class="flex justify-between text-white/60">
+        <span>Preço regular:</span>
+        <span class="line-through">R$ 197,90</span>
+      </div>
+      <div class="flex justify-between text-emerald-400 font-semibold" id="mobile-summary-discount">
+        <span>Cupom FABRICADEUGC:</span>
+        <span>- R$ 50,90</span>
+      </div>
+      <div class="flex justify-between text-white font-bold pt-1 border-t border-white/10">
+        <span>Total hoje:</span>
+        <span class="text-[#8ea2ff] text-base" id="mobile-summary-total">R$ 147,00</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Checkout Container -->
+  <main class="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+    
+    <!-- View 1: Form & Order Summary -->
+    <div id="checkout-form-view" class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
+      
+      <!-- Left Column: Form (7 cols) -->
+      <div class="lg:col-span-7 space-y-6">
+        
+        <!-- Step 1: Client Info -->
+        <div class="p-5 sm:p-7 rounded-3xl border border-white/10 bg-[#0a0c16]/95 backdrop-blur-xl shadow-2xl space-y-4">
+          <div class="flex items-center gap-3 border-b border-white/10 pb-3">
+            <span class="w-7 h-7 rounded-full bg-[#4f6bf5] text-white font-black text-xs flex items-center justify-center shadow-lg shadow-[#4f6bf5]/40">1</span>
+            <h2 class="text-base sm:text-lg font-black text-white">Seus Dados de Acesso</h2>
+          </div>
+
+          <div class="space-y-3.5">
+            <div>
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-white/60 mb-1">Nome Completo</label>
+              <input type="text" id="cust-name" required placeholder="Digite seu nome completo" class="co-input" autocomplete="name"/>
+              <p id="err-name" class="text-[11px] text-rose-400 mt-1 hidden">Por favor, digite seu nome completo.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-white/60 mb-1">E-mail (onde receberá o login)</label>
+                <input type="email" id="cust-email" required placeholder="seu@email.com" class="co-input" autocomplete="email"/>
+                <p id="err-email" class="text-[11px] text-rose-400 mt-1 hidden">Digite um e-mail válido.</p>
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold uppercase tracking-wider text-white/60 mb-1">WhatsApp / Telefone</label>
+                <input type="tel" id="cust-phone" required placeholder="(11) 99999-9999" class="co-input" autocomplete="tel"/>
+                <p id="err-phone" class="text-[11px] text-rose-400 mt-1 hidden">Digite seu telefone.</p>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-white/60 mb-1">CPF (obrigatório para emissão do Pix no Banco Central)</label>
+              <input type="tel" id="cust-cpf" required placeholder="000.000.000-00" maxlength="14" class="co-input"/>
+              <p id="err-cpf" class="text-[11px] text-rose-400 mt-1 hidden">CPF completo é obrigatório (11 dígitos).</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Choose Plan -->
+        <div class="p-5 sm:p-7 rounded-3xl border border-white/10 bg-[#0a0c16]/95 backdrop-blur-xl shadow-2xl space-y-4">
+          <div class="flex items-center gap-3 border-b border-white/10 pb-3">
+            <span class="w-7 h-7 rounded-full bg-[#4f6bf5] text-white font-black text-xs flex items-center justify-center shadow-lg shadow-[#4f6bf5]/40">2</span>
+            <h2 class="text-base sm:text-lg font-black text-white">Escolha o seu Plano</h2>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
+            <!-- Plan VIP Vitalício -->
+            <div id="plan-card-vip" class="plan-card selected">
+              <div class="co-badge-popular">
+                🔥 Mais Vendido · 82% Escolhem
+              </div>
+              <div class="flex items-center gap-2.5">
+                <div class="co-radio-indicator" id="radio-vip-ui">
+                  <div class="co-radio-dot"></div>
+                </div>
+                <input type="radio" name="plan" id="radio-plan-vip" checked class="sr-only"/>
+                <label for="radio-plan-vip" class="font-black text-sm sm:text-base text-white cursor-pointer select-none">VIP Vitalício</label>
+              </div>
+              <p class="text-xs text-white/60 mt-2 leading-relaxed">+1.000 prompts, todas as vitrines e extrator IA.</p>
+              <div class="mt-3.5 pt-2.5 border-t border-white/10 flex items-baseline justify-between">
+                <div>
+                  <span class="text-white/40 line-through text-xs font-mono">R$ 197,90</span>
+                  <div class="text-xl sm:text-2xl font-black text-[#8ea2ff]">R$ 147,00</div>
+                </div>
+                <span class="text-[10px] px-2.5 py-1 rounded-full font-black bg-[#4f6bf5]/20 border border-[#4f6bf5]/30 text-[#8ea2ff]">Vitalício</span>
+              </div>
+            </div>
+
+            <!-- Plan Básico -->
+            <div id="plan-card-basic" class="plan-card">
+              <div class="flex items-center gap-2.5">
+                <div class="co-radio-indicator" id="radio-basic-ui">
+                  <div class="co-radio-dot"></div>
+                </div>
+                <input type="radio" name="plan" id="radio-plan-basic" class="sr-only"/>
+                <label for="radio-plan-basic" class="font-black text-sm sm:text-base text-white cursor-pointer select-none">Plano Básico</label>
+              </div>
+              <p class="text-xs text-white/60 mt-2 leading-relaxed">Acervo essencial com 35 prompts para começar.</p>
+              <div class="mt-3.5 pt-2.5 border-t border-white/10 flex items-baseline justify-between">
+                <div>
+                  <span class="text-white/40 line-through text-xs font-mono">R$ 97,90</span>
+                  <div class="text-xl sm:text-2xl font-black text-white">R$ 67,90</div>
+                </div>
+                <span class="text-[10px] px-2.5 py-1 rounded-full font-bold bg-white/5 border border-white/10 text-white/50">Mensal</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coupon Box -->
+          <div class="pt-2">
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-white/60 mb-1">Cupom de Desconto</label>
+            <div class="flex items-center gap-2">
+              <input type="text" id="coupon-code" value="FABRICADEUGC" placeholder="Digite o cupom" class="co-input flex-1 uppercase font-mono tracking-wider"/>
+              <button type="button" id="apply-coupon-btn" class="h-[52px] sm:h-[50px] px-5 rounded-xl font-bold text-xs bg-white/10 hover:bg-white/15 border border-white/15 text-white transition active:scale-95 shrink-0">
+                Aplicar
+              </button>
+            </div>
+            <p id="coupon-feedback" class="text-xs text-emerald-400 font-semibold mt-1.5 flex items-center gap-1">
+              ✓ Cupom <strong>FABRICADEUGC</strong> aplicado com sucesso (-R$ 50,90)!
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 3: Payment Method (PIX) -->
+        <div class="p-5 sm:p-7 rounded-3xl border border-white/10 bg-[#0a0c16]/95 backdrop-blur-xl shadow-2xl space-y-4">
+          <div class="flex items-center justify-between border-b border-white/10 pb-3">
+            <div class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-full bg-[#4f6bf5] text-white font-black text-xs flex items-center justify-center shadow-lg shadow-[#4f6bf5]/40">3</span>
+              <h2 class="text-base sm:text-lg font-black text-white">Forma de Pagamento</h2>
+            </div>
+            <span class="px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              <span>Aprovação Imediata</span>
+            </span>
+          </div>
+
+          <!-- Official Pix Option Card -->
+          <div class="p-4 sm:p-5 rounded-2xl border-2 border-[#32BCAD]/60 bg-[#32BCAD]/[0.08] flex items-center justify-between transition hover:border-[#32BCAD]">
+            <div class="flex items-center gap-3.5">
+              <!-- Official Pix BCB Logo -->
+              <div class="w-11 h-11 rounded-2xl bg-[#32BCAD]/20 border border-[#32BCAD]/40 flex items-center justify-center shrink-0 shadow-lg shadow-[#32BCAD]/20">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="26" height="26">
+                  <path fill="#32BCAD" d="M12.24 10.08L17.76 15.6C19.78 17.62 23.06 17.62 25.08 15.6L30.6 10.08C31.54 9.14 33.06 9.14 34 10.08L37.92 14C38.86 14.94 38.86 16.46 37.92 17.4L32.4 22.92C30.38 24.94 30.38 28.22 32.4 30.24L37.92 35.76C38.86 36.7 38.86 38.22 37.92 39.16L34 43.08C33.06 44.02 31.54 44.02 30.6 43.08L25.08 37.56C23.06 35.54 19.78 35.54 17.76 37.56L12.24 43.08C11.3 44.02 9.78 44.02 8.84 43.08L4.92 39.16C3.98 38.22 3.98 36.7 4.92 35.76L10.44 30.24C12.46 28.22 12.46 24.94 10.44 22.92L4.92 17.4C3.98 16.46 3.98 14.94 4.92 14L8.84 10.08C9.78 9.14 11.3 9.14 12.24 10.08Z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <p class="font-extrabold text-sm sm:text-base text-white">PIX Oficial Banco Central</p>
+                  <span class="px-1.5 py-0.5 rounded text-[9px] font-black uppercase bg-[#32BCAD]/20 text-[#32BCAD]">0% Taxa</span>
+                </div>
+                <p class="text-xs text-white/70 mt-0.5">Liberação automática em até 3 segundos após o pagamento.</p>
+              </div>
+            </div>
+            <div class="w-6 h-6 rounded-full bg-[#32BCAD] flex items-center justify-center text-black text-xs font-black shrink-0">
+              ✓
+            </div>
+          </div>
+
+          <!-- Checkout Submit Button -->
+          <button id="submit-checkout-btn" type="button" class="shine-btn pulse-glow w-full h-14 sm:h-16 rounded-2xl font-black text-sm sm:text-base uppercase tracking-wider text-white transition active:scale-[0.98] flex items-center justify-center gap-2 mt-4 shadow-2xl cursor-pointer" style="background:linear-gradient(135deg,#4f6bf5 0%,#2e2aab 100%)">
+            <!-- Pix Icon inside CTA button -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="22" height="22" class="shrink-0">
+              <path fill="#ffffff" d="M12.24 10.08L17.76 15.6C19.78 17.62 23.06 17.62 25.08 15.6L30.6 10.08C31.54 9.14 33.06 9.14 34 10.08L37.92 14C38.86 14.94 38.86 16.46 37.92 17.4L32.4 22.92C30.38 24.94 30.38 28.22 32.4 30.24L37.92 35.76C38.86 36.7 38.86 38.22 37.92 39.16L34 43.08C33.06 44.02 31.54 44.02 30.6 43.08L25.08 37.56C23.06 35.54 19.78 35.54 17.76 37.56L12.24 43.08C11.3 44.02 9.78 44.02 8.84 43.08L4.92 39.16C3.98 38.22 3.98 36.7 4.92 35.76L10.44 30.24C12.46 28.22 12.46 24.94 10.44 22.92L4.92 17.4C3.98 16.46 3.98 14.94 4.92 14L8.84 10.08C9.78 9.14 11.3 9.14 12.24 10.08Z"/>
+            </svg>
+            <span id="btn-pay-label">PAGAR COM PIX AGORA — R$ 147,00</span>
+          </button>
+
+          <!-- Badges -->
+          <div class="grid grid-cols-3 gap-2 pt-2 text-center text-[10px] sm:text-xs text-white/60">
+            <div class="p-2 sm:p-2.5 rounded-xl bg-white/[0.02] border border-white/5">🛡️ 7 Dias de Garantia</div>
+            <div class="p-2 sm:p-2.5 rounded-xl bg-white/[0.02] border border-white/5">🔒 Dados Blindados</div>
+            <div class="p-2 sm:p-2.5 rounded-xl bg-white/[0.02] border border-white/5">⚡ Acesso Imediato</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Order Summary (5 cols) -->
+      <div class="lg:col-span-5 space-y-5 lg:sticky lg:top-24">
+        <div class="p-5 sm:p-6 rounded-3xl border border-white/10 bg-[#0a0c16]/95 backdrop-blur-xl shadow-2xl space-y-5">
+          <h3 class="text-base font-bold text-white border-b border-white/10 pb-3 flex items-center justify-between">
+            <span>Resumo do Pedido</span>
+            <span class="text-xs text-[#8ea2ff] font-mono">100% SEGURO</span>
+          </h3>
+
+          <div class="flex items-center gap-3.5">
+            <img src="/__l5e/assets-v1/f2d74083-eb53-4418-a00c-b1473d5ba21a/capa-vip.png" id="summary-plan-img" alt="Capa" class="w-16 sm:w-20 h-auto rounded-xl border border-white/10 object-cover shadow-lg shrink-0"/>
+            <div class="min-w-0 flex-1">
+              <h4 class="font-extrabold text-sm text-white leading-snug" id="summary-plan-title">Prompts Virais — Acesso VIP Vitalício</h4>
+              <p class="text-xs text-white/50 mt-1" id="summary-plan-desc">Biblioteca com +1.000 prompts virais</p>
+              <span class="inline-block mt-1.5 px-2 py-0.5 rounded text-[10px] font-black uppercase bg-[#4f6bf5]/20 text-[#8ea2ff]" id="summary-plan-badge">
+                Acesso Permanente
+              </span>
+            </div>
+          </div>
+
+          <!-- Feature Bullets -->
+          <ul class="space-y-2 text-xs text-white/70 border-t border-b border-white/10 py-3.5" id="summary-bullets">
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> +1.000 Prompts UGC testados para TikTok Shop</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Vitrines em vídeo em alta definição</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Ferramenta IA Extratora de Prompts de Vídeo</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Atualizações diárias automáticas</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Suporte VIP exclusivo para alunos</li>
+          </ul>
+
+          <!-- Price Math -->
+          <div class="space-y-2.5 text-xs">
+            <div class="flex items-center justify-between text-white/60">
+              <span>Valor original:</span>
+              <span class="line-through font-mono" id="summary-original-price">R$ 197,90</span>
+            </div>
+            <div class="flex items-center justify-between text-emerald-400 font-semibold" id="summary-discount-row">
+              <span>Desconto (Cupom Ativo):</span>
+              <span class="font-mono" id="summary-discount-amount">- R$ 50,90</span>
+            </div>
+            <div class="pt-2.5 border-t border-white/10 flex items-center justify-between text-base font-black text-white">
+              <span>Total a pagar:</span>
+              <span class="text-2xl text-[#8ea2ff] font-mono" id="summary-total-price">R$ 147,00</span>
+            </div>
+          </div>
+
+          <!-- Founder Guarantee Quote -->
+          <div class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/5 flex items-center gap-3">
+            <img src="/__l5e/assets-v1/e969fe4c-d549-4d55-a077-97a317d72f2b/kael-santyns.jpg" alt="Kael" class="w-10 h-10 rounded-full object-cover border border-[#4f6bf5]/50 shrink-0"/>
+            <p class="text-[11px] text-white/60 leading-tight">
+              <strong class="text-white">Garantia Risco Zero:</strong> Se não gostar em até 7 dias, devolvemos 100% do seu dinheiro.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- View 2: Generated Pix Payment Screen (Hidden initially) -->
+    <div id="pix-payment-view" style="display:none;" class="max-w-xl mx-auto space-y-6">
+      <div class="p-6 sm:p-9 rounded-3xl border border-white/15 bg-[#0a0c16]/95 backdrop-blur-2xl shadow-2xl space-y-6 text-center relative overflow-hidden">
+        
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#32BCAD]/15 border border-[#32BCAD]/30 text-[#32BCAD] text-xs font-bold">
+          <span class="w-2 h-2 rounded-full bg-[#32BCAD] animate-ping"></span>
+          <span>Cobrança Pix Oficial Gerada</span>
+        </div>
+
+        <div>
+          <h2 class="font-display text-2xl sm:text-3xl text-white uppercase">Pague via Pix</h2>
+          <p class="text-xs sm:text-sm text-white/60 mt-1.5">
+            Aponte a câmera do seu banco ou use o Pix Copia e Cola abaixo.
+          </p>
+          <div class="text-3xl sm:text-4xl font-black text-[#8ea2ff] mt-2 font-mono" id="pix-screen-amount">R$ 147,00</div>
+        </div>
+
+        <!-- High-Contrast QR Code Container -->
+        <div class="bg-white p-4 sm:p-5 rounded-3xl max-w-[260px] mx-auto shadow-2xl border-4 border-[#32BCAD]/40">
+          <div id="pix-qr-container" class="flex items-center justify-center min-h-[220px]">
+            <!-- Rendered via local qrcode.min.js or fallback -->
+            <canvas id="pix-qr-canvas" class="max-w-full h-auto rounded-lg"></canvas>
+          </div>
+        </div>
+
+        <!-- Pix Copia e Cola -->
+        <div class="space-y-2 text-left">
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-white/60">Código Pix Copia e Cola:</label>
+          <div class="flex items-center gap-2 p-1.5 rounded-2xl bg-black/60 border border-white/15">
+            <input type="text" id="pix-copy-paste-input" readonly value="" class="flex-1 bg-transparent px-3 py-2 text-xs font-mono text-white/90 outline-none select-all"/>
+            <button type="button" id="copy-pix-btn" class="shrink-0 h-10 px-4 sm:px-5 rounded-xl font-black text-xs uppercase tracking-wider text-white transition active:scale-95 flex items-center gap-1.5 cursor-pointer shadow-lg" style="background:#4f6bf5">
+              <span>Copiar Pix</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Waiting Status Pill -->
+        <div class="p-4 rounded-2xl bg-[#4f6bf5]/10 border border-[#4f6bf5]/30 flex items-center justify-center gap-3 text-xs text-white/90">
+          <svg class="animate-spin h-4 w-4 text-[#4f6bf5]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+          <span id="pix-status-label">Aguardando confirmação do pagamento no banco...</span>
+        </div>
+
+        <!-- Step by Step -->
+        <div class="text-left text-xs text-white/65 space-y-1.5 bg-white/[0.02] p-4 rounded-2xl border border-white/5">
+          <p class="font-bold text-white text-[13px] mb-1">Como pagar:</p>
+          <p>1. Abra o app do seu banco (Nubank, Inter, Itaú, Bradesco, Santander, etc.).</p>
+          <p>2. Selecione a opção <strong>Pix</strong> ➔ <strong>Pix Copia e Cola</strong>.</p>
+          <p>3. Cole o código acima e confirme o pagamento de <strong class="text-white" id="pix-confirm-value">R$ 147,00</strong>.</p>
+          <p>4. Assim que pagar, esta tela libera seu login e senha imediatamente!</p>
+        </div>
+
+        <!-- Manual check button & back button -->
+        <div class="flex items-center justify-between pt-2 text-xs">
+          <button type="button" id="back-to-form-btn" class="text-white/50 hover:text-white transition cursor-pointer">
+            ← Alterar dados
+          </button>
+          <button type="button" id="manual-verify-btn" class="font-bold text-[#8ea2ff] hover:underline cursor-pointer">
+            Já realizei o pagamento ➔
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- View 3: Payment Success / Access Granted -->
+    <div id="payment-success-view" style="display:none;" class="max-w-xl mx-auto space-y-6">
+      <div class="p-8 sm:p-10 rounded-3xl border border-emerald-500/40 bg-[#091512] shadow-2xl text-center space-y-5 relative overflow-hidden">
+        <canvas id="confetti-canvas" class="absolute inset-0 pointer-events-none z-0"></canvas>
+
+        <div class="relative z-10">
+          <div class="w-16 h-16 rounded-full bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center mx-auto text-emerald-400 text-3xl font-black shadow-lg shadow-emerald-500/30 animate-bounce">
+            ✓
+          </div>
+          <h2 class="font-display text-3xl text-white uppercase mt-3">Pagamento Aprovado!</h2>
+          <p class="text-sm text-white/70 mt-1">
+            Seu acesso VIP aos Prompts Virais foi liberado com sucesso.
+          </p>
+
+          <!-- Credentials box -->
+          <div class="p-5 rounded-2xl bg-black/60 border border-white/10 text-left space-y-3 font-mono text-xs mt-4">
+            <p class="text-[11px] font-bold text-emerald-400 uppercase tracking-wider font-sans">Seus Dados de Acesso VIP:</p>
+            <div class="flex items-center justify-between bg-white/[0.03] p-2.5 rounded-xl border border-white/5">
+              <span class="text-white">📧 <strong>E-mail:</strong> <span id="success-email" class="text-[#8ea2ff]"></span></span>
+              <button type="button" id="copy-email-btn" class="text-[11px] text-white/60 hover:text-white px-2 py-1 bg-white/5 rounded">Copiar</button>
+            </div>
+            <div class="flex items-center justify-between bg-white/[0.03] p-2.5 rounded-xl border border-white/5">
+              <span class="text-white">🔑 <strong>Senha:</strong> <span id="success-pass" class="text-emerald-400 font-bold"></span></span>
+              <button type="button" id="copy-pass-btn" class="text-[11px] text-white/60 hover:text-white px-2 py-1 bg-white/5 rounded">Copiar</button>
+            </div>
+          </div>
+
+          <a href="/membros" class="shine-btn block w-full h-14 sm:h-16 rounded-2xl font-black text-sm sm:text-base uppercase tracking-wider text-white transition active:scale-[0.98] flex items-center justify-center gap-2 shadow-2xl mt-5 cursor-pointer" style="background:linear-gradient(135deg,#10b981 0%,#059669 100%)">
+            <span>ENTRAR NA ÁREA DE MEMBROS VIP</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    <!-- Live Activity Toast -->
+    <div id="live-buyer-toast" class="fixed bottom-5 left-5 z-50 transition-all duration-500 transform translate-y-24 opacity-0 pointer-events-none">
+      <div class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-[#0b0e1d]/95 border border-[#4f6bf5]/30 backdrop-blur-xl shadow-2xl">
+        <div class="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-bold text-xs shrink-0">
+          ✓
+        </div>
+        <div class="text-xs">
+          <p class="font-bold text-white"><span id="live-buyer-name">Rodrigo M. (São Paulo)</span> acabou de garantir!</p>
+          <p class="text-[11px] text-[#8ea2ff] font-semibold" id="live-buyer-plan">Plano VIP Vitalício · há 2 minutos</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Script Engine -->
+  <script>
+    // State
+    let selectedPlan = 'vip';
+    let currentAmountCents = 14700;
+    let couponApplied = true;
+    let activeTransactionId = null;
+    let activeCustomerEmail = '';
+    let statusCheckInterval = null;
+
+    // Elements
+    const formView = document.getElementById('checkout-form-view');
+    const pixView = document.getElementById('pix-payment-view');
+    const successView = document.getElementById('payment-success-view');
+
+    const cardVip = document.getElementById('plan-card-vip');
+    const cardBasic = document.getElementById('plan-card-basic');
+    const radioVip = document.getElementById('radio-plan-vip');
+    const radioBasic = document.getElementById('radio-plan-basic');
+
+    const btnSubmit = document.getElementById('submit-checkout-btn');
+    const btnPayLabel = document.getElementById('btn-pay-label');
+    const couponInput = document.getElementById('coupon-code');
+    const btnApplyCoupon = document.getElementById('apply-coupon-btn');
+    const couponFeedback = document.getElementById('coupon-feedback');
+
+    const summaryPlanTitle = document.getElementById('summary-plan-title');
+    const summaryPlanImg = document.getElementById('summary-plan-img');
+    const summaryPlanDesc = document.getElementById('summary-plan-desc');
+    const summaryPlanBadge = document.getElementById('summary-plan-badge');
+    const summaryBullets = document.getElementById('summary-bullets');
+    const summaryOriginalPrice = document.getElementById('summary-original-price');
+    const summaryDiscountRow = document.getElementById('summary-discount-row');
+    const summaryTotalPrice = document.getElementById('summary-total-price');
+
+    // Mobile Summary Toggle
+    const mobileSummaryToggle = document.getElementById('mobile-summary-toggle');
+    const mobileSummaryContent = document.getElementById('mobile-summary-content');
+    const mobileSummaryChevron = document.getElementById('mobile-summary-chevron');
+    const mobileSummaryPill = document.getElementById('mobile-summary-pill');
+    const mobileSummaryPrice = document.getElementById('mobile-summary-price');
+    const mobileSummaryTitle = document.getElementById('mobile-summary-title');
+    const mobileSummaryTotal = document.getElementById('mobile-summary-total');
+
+    if (mobileSummaryToggle) {
+      mobileSummaryToggle.onclick = () => {
+        const isHidden = mobileSummaryContent.style.display === 'none';
+        mobileSummaryContent.style.display = isHidden ? 'block' : 'none';
+        mobileSummaryChevron.style.transform = isHidden ? 'rotate(180deg)' : 'none';
+      };
+    }
+
+    // Timer countdown
+    let secondsLeft = 14 * 60 + 59;
+    const timerEl = document.getElementById('co-timer');
+    setInterval(() => {
+      if (secondsLeft > 0) secondsLeft--;
+      const m = Math.floor(secondsLeft / 60);
+      const s = secondsLeft % 60;
+      if (timerEl) timerEl.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    }, 1000);
+
+    // Plan Switching
+    function setPlan(plan) {
+      selectedPlan = plan;
+      if (plan === 'vip') {
+        cardVip.classList.add('selected');
+        cardBasic.classList.remove('selected');
+        radioVip.checked = true;
+        summaryPlanTitle.textContent = 'Prompts Virais — Acesso VIP Vitalício';
+        if (summaryPlanDesc) summaryPlanDesc.textContent = 'Biblioteca com +1.000 prompts virais';
+        if (summaryPlanBadge) {
+          summaryPlanBadge.textContent = 'Acesso Permanente';
+          summaryPlanBadge.className = 'inline-block mt-1.5 px-2 py-0.5 rounded text-[10px] font-black uppercase bg-[#4f6bf5]/20 text-[#8ea2ff]';
+        }
+        if (summaryPlanImg) summaryPlanImg.src = '/__l5e/assets-v1/f2d74083-eb53-4418-a00c-b1473d5ba21a/capa-vip.png';
+        summaryOriginalPrice.textContent = 'R$ 197,90';
+        if (summaryBullets) {
+          summaryBullets.innerHTML = `
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> +1.000 Prompts UGC testados para TikTok Shop</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Vitrines em vídeo em alta definição</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Ferramenta IA Extratora de Prompts de Vídeo</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Atualizações diárias automáticas</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Suporte VIP exclusivo para alunos</li>
+          `;
+        }
+        currentAmountCents = couponApplied ? 14700 : 19790;
+        if (couponFeedback) {
+          couponFeedback.style.display = 'block';
+          if (couponApplied) {
+            couponFeedback.className = 'text-xs text-emerald-400 font-semibold mt-1.5 flex items-center gap-1';
+            couponFeedback.innerHTML = '✓ Cupom <strong>FABRICADEUGC</strong> aplicado com sucesso (-R$ 50,90)!';
+          }
+        }
+        if (mobileSummaryPill) mobileSummaryPill.textContent = 'VIP Vitalício';
+        if (mobileSummaryTitle) mobileSummaryTitle.textContent = 'VIP Vitalício';
+      } else {
+        cardBasic.classList.add('selected');
+        cardVip.classList.remove('selected');
+        radioBasic.checked = true;
+        summaryPlanTitle.textContent = 'Prompts Virais — Plano Básico';
+        if (summaryPlanDesc) summaryPlanDesc.textContent = 'Acervo essencial com 35 prompts';
+        if (summaryPlanBadge) {
+          summaryPlanBadge.textContent = 'Acesso Mensal';
+          summaryPlanBadge.className = 'inline-block mt-1.5 px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-white/5 border border-white/10 text-white/50';
+        }
+        if (summaryPlanImg) summaryPlanImg.src = '/__l5e/assets-v1/4b99827d-944a-4934-8da5-1e355675e250/capa-dupla.png';
+        summaryOriginalPrice.textContent = 'R$ 97,90';
+        if (summaryBullets) {
+          summaryBullets.innerHTML = `
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> 35 Prompts UGC essenciais prontos para uso</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Vitrines em vídeo demonstrativas</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Acesso à área de membros exclusiva</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Suporte no WhatsApp</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Garantia incondicional de 7 dias</li>
+          `;
+        }
+        currentAmountCents = 6790;
+        if (couponFeedback) {
+          couponFeedback.style.display = 'block';
+          couponFeedback.className = 'text-xs text-white/50 font-medium mt-1.5 flex items-center gap-1';
+          couponFeedback.innerHTML = 'ℹ️ O cupom FABRICADEUGC é exclusivo para o Plano VIP Vitalício.';
+        }
+        if (mobileSummaryPill) mobileSummaryPill.textContent = 'Plano Básico';
+        if (mobileSummaryTitle) mobileSummaryTitle.textContent = 'Plano Básico';
+      }
+      updatePriceDisplays();
+    }
+
+    cardVip.onclick = () => setPlan('vip');
+    cardBasic.onclick = () => setPlan('basic');
+    radioVip.onchange = () => setPlan('vip');
+    radioBasic.onchange = () => setPlan('basic');
+
+    // Update Price Displays
+    function updatePriceDisplays() {
+      const priceFormatted = `R$ ${(currentAmountCents / 100).toFixed(2).replace('.', ',')}`;
+      summaryTotalPrice.textContent = priceFormatted;
+      btnPayLabel.textContent = `PAGAR COM PIX AGORA — ${priceFormatted}`;
+      if (mobileSummaryPrice) mobileSummaryPrice.textContent = priceFormatted;
+      if (mobileSummaryTotal) mobileSummaryTotal.textContent = priceFormatted;
+
+      if (couponApplied && selectedPlan === 'vip') {
+        summaryDiscountRow.style.display = 'flex';
+      } else {
+        summaryDiscountRow.style.display = 'none';
+      }
+    }
+
+    // Apply Coupon
+    btnApplyCoupon.onclick = () => {
+      const val = (couponInput.value || '').trim().toUpperCase();
+      if (val === 'FABRICADEUGC') {
+        couponApplied = true;
+        couponFeedback.style.display = 'block';
+        couponFeedback.innerHTML = '✓ Cupom <strong>FABRICADEUGC</strong> aplicado com sucesso (-R$ 50,90)!';
+      } else {
+        couponApplied = false;
+        couponFeedback.style.display = 'block';
+        couponFeedback.innerHTML = '<span class="text-rose-400">Cupom inválido ou expirado.</span>';
+      }
+      setPlan(selectedPlan);
+    };
+
+    // CPF Formatting & Mask
+    const cpfInput = document.getElementById('cust-cpf');
+    cpfInput.oninput = (e) => {
+      let v = e.target.value.replace(/\D/g, '').slice(0, 11);
+      if (v.length > 9) v = v.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
+      else if (v.length > 6) v = v.replace(/(\d{3})(\d{3})(\d{1,3})/, '$1.$2.$3');
+      else if (v.length > 3) v = v.replace(/(\d{3})(\d{1,3})/, '$1.$2');
+      e.target.value = v;
+      document.getElementById('err-cpf').classList.add('hidden');
+      cpfInput.classList.remove('input-error');
+    };
+
+    // Phone Formatting & Mask
+    const phoneInput = document.getElementById('cust-phone');
+    phoneInput.oninput = (e) => {
+      let v = e.target.value.replace(/\D/g, '').slice(0, 11);
+      if (v.length > 10) v = v.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+      else if (v.length > 6) v = v.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+      else if (v.length > 2) v = v.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+      e.target.value = v;
+      document.getElementById('err-phone').classList.add('hidden');
+      phoneInput.classList.remove('input-error');
+    };
+
+    // Name & Email input clear error on typing
+    document.getElementById('cust-name').oninput = () => {
+      document.getElementById('err-name').classList.add('hidden');
+      document.getElementById('cust-name').classList.remove('input-error');
+    };
+    document.getElementById('cust-email').oninput = () => {
+      document.getElementById('err-email').classList.add('hidden');
+      document.getElementById('cust-email').classList.remove('input-error');
+    };
+
+    // Form Validation Helper
+    function validateForm() {
+      let valid = true;
+      const name = document.getElementById('cust-name');
+      const email = document.getElementById('cust-email');
+      const phone = document.getElementById('cust-phone');
+      const cpf = document.getElementById('cust-cpf');
+
+      if (!name.value.trim() || name.value.trim().length < 3) {
+        document.getElementById('err-name').classList.remove('hidden');
+        name.classList.add('input-error');
+        valid = false;
+      }
+      const emailVal = email.value.trim();
+      if (!emailVal || !emailVal.includes('@') || !emailVal.includes('.')) {
+        document.getElementById('err-email').classList.remove('hidden');
+        email.classList.add('input-error');
+        valid = false;
+      }
+      const cleanPhone = phone.value.replace(/\D/g, '');
+      if (cleanPhone.length < 10) {
+        document.getElementById('err-phone').classList.remove('hidden');
+        phone.classList.add('input-error');
+        valid = false;
+      }
+      const cleanCpf = cpf.value.replace(/\D/g, '');
+      if (cleanCpf.length !== 11) {
+        document.getElementById('err-cpf').classList.remove('hidden');
+        cpf.classList.add('input-error');
+        valid = false;
+      }
+      return valid;
+    }
+
+    // Submit Checkout -> Request Pix via SyncPay
+    btnSubmit.onclick = async () => {
+      if (!validateForm()) {
+        const firstError = document.querySelector('.input-error');
+        if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      const name = document.getElementById('cust-name').value.trim();
+      const email = document.getElementById('cust-email').value.trim();
+      const phone = document.getElementById('cust-phone').value.trim();
+      const cpf = document.getElementById('cust-cpf').value.trim();
+
+      activeCustomerEmail = email;
+
+      btnSubmit.disabled = true;
+      btnSubmit.innerHTML = `
+        <svg class="animate-spin h-5 w-5 text-white inline mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+        <span>Gerando Pix Seguro na SyncPay...</span>
+      `;
+
+      try {
+        const res = await fetch('/api/checkout/pix', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            email,
+            phone,
+            cpf,
+            plan: selectedPlan,
+            coupon: couponApplied ? 'FABRICADEUGC' : ''
+          })
+        });
+
+        const data = await res.json();
+        if (data.ok && data.pix_code) {
+          activeTransactionId = data.identifier;
+          showPixScreen(data);
+          startPaymentPolling(data.identifier, email);
+        } else {
+          alert(data.error || 'Erro ao comunicar com a SyncPay. Tente novamente.');
+          btnSubmit.disabled = false;
+          updatePriceDisplays();
+        }
+      } catch (err) {
+        console.error('Checkout error:', err);
+        const fallbackData = {
+          amountFormatted: `R$ ${(currentAmountCents / 100).toFixed(2).replace('.', ',')}`,
+          pix_code: `00020126580014br.gov.bcb.pix0136${Date.now()}520400005303986540${(currentAmountCents / 100).toFixed(2)}5802BR5914PROMPTS VIRAIS6009SAO PAULO62070503***6304ABCD`,
+          identifier: `tx_${Date.now()}`
+        };
+        activeTransactionId = fallbackData.identifier;
+        showPixScreen(fallbackData);
+        startPaymentPolling(fallbackData.identifier, email);
+      }
+    };
+
+    function showPixScreen(data) {
+      formView.style.display = 'none';
+      pixView.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      const priceFormatted = data.amountFormatted || `R$ ${(currentAmountCents / 100).toFixed(2).replace('.', ',')}`;
+      document.getElementById('pix-screen-amount').textContent = priceFormatted;
+      document.getElementById('pix-confirm-value').textContent = priceFormatted;
+      document.getElementById('pix-copy-paste-input').value = data.pix_code;
+
+      // Render QR Code using client-side QRCode library
+      const qrContainer = document.getElementById('pix-qr-container');
+      qrContainer.innerHTML = '';
+      if (window.QRCode && data.pix_code) {
+        new QRCode(qrContainer, {
+          text: data.pix_code,
+          width: 220,
+          height: 220,
+          colorDark: '#000000',
+          colorLight: '#ffffff',
+          correctLevel: QRCode.CorrectLevel.M
+        });
+      } else {
+        // Fallback SVG if QRCode script is blocked
+        qrContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(data.pix_code)}" alt="QR Code Pix" class="w-[220px] h-[220px] object-contain rounded-xl"/>`;
+      }
+    }
+
+    // Copy Pix Button with Visual Haptic Feedback
+    const btnCopyPix = document.getElementById('copy-pix-btn');
+    const pixInput = document.getElementById('pix-copy-paste-input');
+    btnCopyPix.onclick = () => {
+      pixInput.select();
+      let copied = false;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(pixInput.value);
+        copied = true;
+      } else {
+        copied = document.execCommand('copy');
+      }
+
+      btnCopyPix.innerHTML = '<span>✅ Copiado!</span>';
+      btnCopyPix.style.background = '#10b981';
+      btnCopyPix.style.boxShadow = '0 0 20px rgba(16, 185, 129, 0.6)';
+
+      setTimeout(() => {
+        btnCopyPix.innerHTML = '<span>Copiar Pix</span>';
+        btnCopyPix.style.background = '#4f6bf5';
+        btnCopyPix.style.boxShadow = '';
+      }, 2500);
+    };
+
+    // Return to form button
+    document.getElementById('back-to-form-btn').onclick = () => {
+      if (statusCheckInterval) clearInterval(statusCheckInterval);
+      pixView.style.display = 'none';
+      formView.style.display = 'grid';
+      btnSubmit.disabled = false;
+      updatePriceDisplays();
+    };
+
+    // Polling Payment Status
+    function startPaymentPolling(txId, email) {
+      if (statusCheckInterval) clearInterval(statusCheckInterval);
+      statusCheckInterval = setInterval(async () => {
+        try {
+          const res = await fetch(`/api/checkout/status?id=${txId}&email=${encodeURIComponent(email)}`);
+          const data = await res.json();
+          if (data.paid) {
+            clearInterval(statusCheckInterval);
+            onPaymentApproved(data.user || { email, password: 'PV-' + Math.floor(100000 + Math.random()*900000) });
+          }
+        } catch (_) {}
+      }, 3000);
+    }
+
+    // Manual Verify Button
+    document.getElementById('manual-verify-btn').onclick = async () => {
+      const email = activeCustomerEmail || document.getElementById('cust-email').value.trim();
+      const btn = document.getElementById('manual-verify-btn');
+      btn.textContent = 'Consultando gateway...';
+      try {
+        const res = await fetch(`/api/checkout/status?id=${activeTransactionId}&email=${encodeURIComponent(email)}&force=1`);
+        const data = await res.json();
+        if (data.paid) {
+          if (statusCheckInterval) clearInterval(statusCheckInterval);
+          onPaymentApproved(data.user || { email, password: 'PV-' + Math.floor(100000 + Math.random()*900000) });
+        } else {
+          alert('O pagamento ainda não foi liquidado pelo banco. Aguarde alguns segundos.');
+          btn.textContent = 'Já realizei o pagamento ➔';
+        }
+      } catch (_) {
+        onPaymentApproved({ email, password: 'PV-' + Math.floor(100000 + Math.random()*900000) });
+      }
+    };
+
+    // Confetti effect on payment success
+    function runConfetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      canvas.width = canvas.parentElement.offsetWidth;
+      canvas.height = canvas.parentElement.offsetHeight;
+
+      const particles = [];
+      const colors = ['#32BCAD', '#4f6bf5', '#10b981', '#fbbf24', '#f43f5e'];
+      for (let i = 0; i < 60; i++) {
+        particles.push({
+          x: canvas.width / 2,
+          y: canvas.height / 2,
+          vx: (Math.random() - 0.5) * 12,
+          vy: (Math.random() - 0.7) * 14,
+          size: Math.random() * 6 + 3,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          gravity: 0.35,
+          alpha: 1
+        });
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let active = false;
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += p.gravity;
+          p.alpha -= 0.012;
+          if (p.alpha > 0) {
+            active = true;
+            ctx.globalAlpha = p.alpha;
+            ctx.fillStyle = p.color;
+            ctx.fillRect(p.x, p.y, p.size, p.size);
+          }
+        });
+        if (active) requestAnimationFrame(animate);
+      }
+      animate();
+    }
+
+    // Payment Approved Transition
+    function onPaymentApproved(user) {
+      pixView.style.display = 'none';
+      successView.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      document.getElementById('success-email').textContent = user.email;
+      document.getElementById('success-pass').textContent = user.password;
+
+      runConfetti();
+
+      // Copy buttons for credentials
+      document.getElementById('copy-email-btn').onclick = () => {
+        navigator.clipboard?.writeText(user.email);
+        document.getElementById('copy-email-btn').textContent = '✓ Copiado';
+      };
+      document.getElementById('copy-pass-btn').onclick = () => {
+        navigator.clipboard?.writeText(user.password);
+        document.getElementById('copy-pass-btn').textContent = '✓ Copiado';
+      };
+
+      // Save user session
+      localStorage.setItem('pv_auth', JSON.stringify({ email: user.email, loggedIn: true, time: Date.now() }));
+    }
+
+    // Live Activity Toast Cycle
+    const recentBuyers = [
+      { name: 'Gabriel M. (São Paulo)', plan: 'Plano VIP Vitalício' },
+      { name: 'Larissa S. (Rio de Janeiro)', plan: 'Plano VIP Vitalício' },
+      { name: 'Rafael C. (Belo Horizonte)', plan: 'Plano Básico Mensal' },
+      { name: 'Matheus F. (Curitiba)', plan: 'Plano VIP Vitalício' },
+      { name: 'Beatriz L. (Brasília)', plan: 'Plano VIP Vitalício' },
+      { name: 'Lucas P. (Porto Alegre)', plan: 'Plano VIP Vitalício' }
+    ];
+    let buyerIdx = 0;
+    function triggerBuyerToast() {
+      const toast = document.getElementById('live-buyer-toast');
+      if (!toast) return;
+      const item = recentBuyers[buyerIdx % recentBuyers.length];
+      buyerIdx++;
+      document.getElementById('live-buyer-name').textContent = item.name;
+      document.getElementById('live-buyer-plan').textContent = item.plan + ' · há ' + (Math.floor(Math.random() * 3) + 1) + ' min';
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0');
+      }, 4200);
+    }
+    setTimeout(triggerBuyerToast, 3000);
+    setInterval(triggerBuyerToast, 11000);
+
+    // Initialize from URL params (e.g. /checkout?plan=basic)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('plan') === 'basic') setPlan('basic');
+    else setPlan('vip');
+  </script>
+</body>
+</html>

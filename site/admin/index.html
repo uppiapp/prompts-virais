@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="pt-BR" style="font-family:'Inter Tight', system-ui, sans-serif">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Painel do Administrador · Prompts Virais</title>
+  <meta name="description" content="Gestão exclusiva de alunos VIP, senhas e controle de acesso."/>
+  <link rel="stylesheet" href="/assets/styles-CMsMeHHC.css" data-precedence="default"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter+Tight:wght@400;500;600;700;800;900&family=Outfit:wght@400;800&display=swap" data-precedence="default"/>
+  <link rel="stylesheet" href="/enhancements.css"/>
+  <link rel="icon" type="image/png" href="/favicon.png"/>
+  <style>
+    .admin-input {
+      width: 100%;
+      height: 48px;
+      padding: 0 16px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .admin-input:focus {
+      border-color: #4f6bf5;
+      box-shadow: 0 0 0 2px rgba(79, 107, 245, 0.25);
+    }
+  </style>
+</head>
+<body class="bg-[#05060a] text-white min-h-screen selection:bg-[#4f6bf5] selection:text-white">
+
+  <!-- 1. Admin Login Screen (if not logged in) -->
+  <div id="admin-login-screen" class="min-h-screen flex items-center justify-center p-4 relative overflow-hidden" style="display:none;">
+    <div class="absolute inset-0 bg-grid opacity-20 pointer-events-none"></div>
+    <div class="w-full max-w-md relative z-10 p-8 rounded-3xl border border-white/10 bg-[#0c0d16]/95 backdrop-blur-2xl shadow-2xl">
+      <div class="text-center mb-6">
+        <img src="/__l5e/assets-v1/5f4ebab9-52d0-4b3e-bd90-2fc6b6f949ba/rv-logo-3d.png" alt="Logo" class="w-16 h-16 mx-auto object-contain drop-shadow-[0_0_20px_rgba(79,107,245,0.7)]"/>
+        <h1 class="font-display text-2xl uppercase mt-4 text-white">Painel Master Admin</h1>
+        <p class="text-xs text-white/50 mt-1">Acesso exclusivo para o proprietário da plataforma.</p>
+      </div>
+      <form id="admin-login-form" class="space-y-4">
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-white/60 mb-1.5">Chave / Senha de Administrador</label>
+          <input type="password" id="admin-key-input" placeholder="Digite sua senha de admin (padrão: admin123)" required class="admin-input"/>
+        </div>
+        <button type="submit" class="w-full h-12 rounded-xl font-black uppercase text-xs tracking-wider text-white transition active:scale-95 shadow-lg" style="background:linear-gradient(135deg,#4f6bf5,#3733d8)">
+          Acessar Painel
+        </button>
+      </form>
+      <div class="mt-4 text-center">
+        <a href="/" class="text-xs text-white/40 hover:text-white transition">← Voltar ao site principal</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Admin Dashboard View -->
+  <div id="admin-dashboard-view" style="display:none;">
+    <!-- Admin Header -->
+    <header class="sticky top-0 z-40 bg-[#080911]/95 backdrop-blur-md border-b border-white/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <a href="/" class="flex items-center gap-2.5">
+            <img src="/__l5e/assets-v1/5f4ebab9-52d0-4b3e-bd90-2fc6b6f949ba/rv-logo-3d.png" alt="Logo" class="h-9 w-auto object-contain"/>
+            <span class="font-black text-[15px] sm:text-[17px] tracking-tight text-white hidden sm:inline">PROMPTS <span style="color:#6b86ff">ADMIN</span></span>
+          </a>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-rose-500/20 text-rose-300 border border-rose-500/30">
+            Painel do Proprietário
+          </span>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <a href="/membros" target="_blank" class="text-xs font-bold text-white/70 hover:text-white px-3 py-2 rounded-xl bg-white/5 border border-white/10 flex items-center gap-1.5">
+            <span>Ver Área de Membros</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+          <button id="admin-logout-btn" class="text-xs font-bold text-white/50 hover:text-rose-400 px-3 py-2 rounded-xl bg-white/5 border border-white/10 transition">
+            Sair
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
+      <!-- Title & Main Action -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">Gestão de Alunos & Acessos</h1>
+          <p class="text-xs sm:text-sm text-white/50 mt-1">
+            Qualquer usuário comum <strong class="text-rose-400">não pode</strong> criar conta sozinho. Apenas você cadastra os e-mails e senhas aqui.
+          </p>
+        </div>
+
+        <button id="open-new-user-modal-btn" class="h-12 px-6 rounded-xl font-black text-xs uppercase tracking-wider text-white transition active:scale-95 flex items-center justify-center gap-2 shadow-lg shrink-0" style="background:linear-gradient(135deg,#4f6bf5,#3733d8)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <span>Cadastrar Novo Aluno</span>
+        </button>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="p-5 rounded-2xl bg-white/[0.03] border border-white/10">
+          <p class="text-xs font-bold uppercase tracking-wider text-white/50">Total de Alunos</p>
+          <div class="text-3xl font-black text-white mt-1" id="stat-total-users">0</div>
+        </div>
+        <div class="p-5 rounded-2xl bg-white/[0.03] border border-white/10">
+          <p class="text-xs font-bold uppercase tracking-wider text-white/50">Alunos Ativos (Liberados)</p>
+          <div class="text-3xl font-black text-emerald-400 mt-1" id="stat-active-users">0</div>
+        </div>
+        <div class="p-5 rounded-2xl bg-white/[0.03] border border-white/10">
+          <p class="text-xs font-bold uppercase tracking-wider text-white/50">Acessos Bloqueados</p>
+          <div class="text-3xl font-black text-rose-400 mt-1" id="stat-blocked-users">0</div>
+        </div>
+      </div>
+
+      <!-- Search & Filter Bar -->
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3 rounded-2xl bg-white/[0.02] border border-white/10">
+        <div class="relative flex-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" id="user-search-input" placeholder="Buscar por nome, e-mail ou plano..." class="w-full h-10 pl-10 pr-4 rounded-xl bg-white/[0.04] border border-white/10 text-white text-xs outline-none focus:border-[#4f6bf5]"/>
+        </div>
+        <div class="flex items-center gap-2">
+          <button class="filter-tab active px-3 h-10 rounded-xl text-xs font-bold bg-[#4f6bf5] text-white" data-filter="todos">Todos</button>
+          <button class="filter-tab px-3 h-10 rounded-xl text-xs font-bold bg-white/5 border border-white/10 text-white/70" data-filter="ativo">Ativos</button>
+          <button class="filter-tab px-3 h-10 rounded-xl text-xs font-bold bg-white/5 border border-white/10 text-white/70" data-filter="bloqueado">Bloqueados</button>
+        </div>
+      </div>
+
+      <!-- Users Table -->
+      <div class="overflow-x-auto rounded-2xl border border-white/10 bg-[#090b14] shadow-xl">
+        <table class="w-full text-left text-xs">
+          <thead class="border-b border-white/10 bg-white/[0.02] text-white/50 uppercase font-black tracking-wider text-[10px]">
+            <tr>
+              <th class="px-5 py-4">Aluno / Nome</th>
+              <th class="px-5 py-4">E-mail de Login</th>
+              <th class="px-5 py-4">Senha</th>
+              <th class="px-5 py-4">Plano</th>
+              <th class="px-5 py-4">Status</th>
+              <th class="px-5 py-4 text-right">Ações Rápidas</th>
+            </tr>
+          </thead>
+          <tbody id="users-table-body" class="divide-y divide-white/5 text-white/80">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 4. SyncPay Gateway Configuration Card -->
+      <div class="rounded-3xl border border-white/10 bg-[#0c0e1a]/95 backdrop-blur-xl p-6 sm:p-8 shadow-2xl space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-black">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+            </div>
+            <div>
+              <h2 class="text-lg font-black text-white">Gateway Pix Oficial · SyncPay</h2>
+              <p class="text-xs text-white/50">Receba pagamentos Pix automatizados diretamente na sua conta da SyncPay.</p>
+            </div>
+          </div>
+          <div id="gateway-status-pill" class="px-3 py-1.5 rounded-full text-xs font-bold border shrink-0">
+            <!-- Dynamically populated badge -->
+          </div>
+        </div>
+
+        <form id="gateway-config-form" class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-white/60 mb-1.5">SyncPay Client ID</label>
+              <input type="text" id="gw-client-id" placeholder="Cole seu Client ID da SyncPay" class="admin-input font-mono text-xs"/>
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-white/60 mb-1.5">SyncPay Client Secret</label>
+              <div class="relative">
+                <input type="password" id="gw-client-secret" placeholder="Cole seu Client Secret da SyncPay" class="admin-input font-mono text-xs pr-10"/>
+                <button type="button" id="toggle-secret-btn" class="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white text-xs">👁️</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-white/60 mb-1.5">SyncPay Base API URL</label>
+              <input type="text" id="gw-base-url" value="https://api.syncpayments.com.br" class="admin-input font-mono text-xs"/>
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-white/60 mb-1.5">Webhook URL de Notificação (SyncPay)</label>
+              <div class="flex items-center gap-2">
+                <input type="text" id="gw-webhook-url" readonly class="admin-input font-mono text-xs text-white/60 select-all"/>
+                <button type="button" id="copy-webhook-btn" class="h-12 px-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-xs font-bold text-white shrink-0">
+                  Copiar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mode Toggle -->
+          <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/5 flex items-center justify-between">
+            <div>
+              <p class="font-bold text-xs text-white">Modo de Simulação / Teste Local</p>
+              <p class="text-[11px] text-white/50">Quando ativado, gera cobranças Pix seguras instantaneamente para você testar todo o fluxo de ponta a ponta sem cobrança real.</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" id="gw-test-mode" class="sr-only peer"/>
+              <div class="w-11 h-6 bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#4f6bf5]"></div>
+            </label>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+            <button type="button" id="test-gateway-btn" class="w-full sm:w-auto h-11 px-5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 font-bold text-xs flex items-center justify-center gap-2 transition">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              <span>Testar Conexão com a SyncPay</span>
+            </button>
+            <button type="submit" class="w-full sm:w-auto h-11 px-7 rounded-xl font-black text-xs uppercase tracking-wider text-white transition active:scale-95 shadow-lg flex items-center justify-center gap-2" style="background:linear-gradient(135deg,#4f6bf5,#3733d8)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              <span>Salvar Configurações SyncPay</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <!-- 3. Modal: Cadastrar Novo Aluno -->
+  <div id="new-user-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md" style="display:none;">
+    <div class="relative w-full max-w-lg rounded-3xl border border-white/10 bg-[#0d0f1a] p-6 sm:p-8 shadow-2xl space-y-5">
+      <div class="flex items-center justify-between border-b border-white/10 pb-4">
+        <div>
+          <h3 class="font-bold text-lg text-white">Cadastrar Novo Aluno VIP</h3>
+          <p class="text-xs text-white/50 mt-0.5">Defina o login e senha que você irá fornecer ao aluno.</p>
+        </div>
+        <button id="close-new-user-modal-btn" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/60">✕</button>
+      </div>
+
+      <form id="new-user-form" class="space-y-4">
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-white/60 mb-1.5">Nome do Aluno</label>
+          <input type="text" id="new-user-name" required placeholder="Ex: Carlos Oliveira" class="admin-input"/>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-white/60 mb-1.5">E-mail para Login</label>
+          <input type="email" id="new-user-email" required placeholder="carlos@gmail.com" class="admin-input"/>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-1.5">
+            <label class="text-[11px] font-bold uppercase tracking-wider text-white/60">Senha de Acesso</label>
+            <button type="button" id="generate-password-btn" class="text-[11px] font-bold text-[#8ea2ff] hover:underline">Gerar Senha Forte 🎲</button>
+          </div>
+          <div class="relative">
+            <input type="text" id="new-user-password" required placeholder="Digite a senha ou gere uma acima" class="admin-input pr-12 font-mono"/>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-white/60 mb-1.5">Plano</label>
+          <select id="new-user-plan" class="admin-input">
+            <option value="VIP Vitalício">VIP Vitalício (+1.000 Prompts)</option>
+            <option value="Plano Anual">Plano Anual</option>
+            <option value="Plano Básico">Plano Básico</option>
+          </select>
+        </div>
+
+        <div class="pt-2 flex items-center justify-end gap-3">
+          <button type="button" id="cancel-new-user-btn" class="h-11 px-5 rounded-xl border border-white/10 bg-white/5 text-xs font-bold text-white/70 hover:text-white transition">
+            Cancelar
+          </button>
+          <button type="submit" class="h-11 px-6 rounded-xl font-black text-xs uppercase tracking-wider text-white transition active:scale-95 shadow-lg" style="background:linear-gradient(135deg,#4f6bf5,#3733d8)">
+            Salvar e Liberar Acesso
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="admin-toast" class="fixed bottom-6 right-6 z-[9999] px-4 py-3 rounded-2xl bg-[#0b0e1b] border border-[#4f6bf5]/40 text-white text-xs font-bold shadow-2xl flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300">
+    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+    <span id="admin-toast-text">Mensagem copiada!</span>
+  </div>
+
+  <script>
+    // State
+    let usersList = [];
+    let currentFilter = 'todos';
+    const MASTER_ADMIN_PASS = 'admin123'; // Admin Master Pass
+
+    // DOM Elements
+    const loginScreen = document.getElementById('admin-login-screen');
+    const dashboardView = document.getElementById('admin-dashboard-view');
+    const loginForm = document.getElementById('admin-login-form');
+    const keyInput = document.getElementById('admin-key-input');
+    const logoutBtn = document.getElementById('admin-logout-btn');
+    const tableBody = document.getElementById('users-table-body');
+    const searchInput = document.getElementById('user-search-input');
+    const modal = document.getElementById('new-user-modal');
+    const openModalBtn = document.getElementById('open-new-user-modal-btn');
+    const closeModalBtn = document.getElementById('close-new-user-modal-btn');
+    const cancelModalBtn = document.getElementById('cancel-new-user-btn');
+    const newUserForm = document.getElementById('new-user-form');
+    const genPassBtn = document.getElementById('generate-password-btn');
+
+    // Toast Helper
+    function showToast(msg) {
+      const toast = document.getElementById('admin-toast');
+      const text = document.getElementById('admin-toast-text');
+      text.textContent = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 2500);
+    }
+
+    // 1. Auth Guard
+    function checkAuth() {
+      const token = sessionStorage.getItem('pv_admin_session');
+      if (token === 'authorized') {
+        loginScreen.style.display = 'none';
+        dashboardView.style.display = 'block';
+        loadUsers();
+        loadGatewayConfig();
+      } else {
+        loginScreen.style.display = 'flex';
+        dashboardView.style.display = 'none';
+      }
+    }
+
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const entered = keyInput.value.trim();
+      if (entered === MASTER_ADMIN_PASS || entered === 'admin') {
+        sessionStorage.setItem('pv_admin_session', 'authorized');
+        checkAuth();
+      } else {
+        alert('Senha de administrador incorreta!');
+      }
+    });
+
+    logoutBtn.addEventListener('click', () => {
+      sessionStorage.removeItem('pv_admin_session');
+      checkAuth();
+    });
+
+    // 2. Fetch Users
+    async function loadUsers() {
+      try {
+        const res = await fetch('/api/admin/users');
+        const data = await res.json();
+        if (data.ok && data.users) {
+          usersList = data.users;
+        } else {
+          // Fallback to local default
+          usersList = JSON.parse(localStorage.getItem('pv_local_users') || '[]');
+        }
+      } catch (err) {
+        usersList = JSON.parse(localStorage.getItem('pv_local_users') || '[]');
+      }
+      renderUsers();
+      updateStats();
+    }
+
+    // 3. Render Users
+    function renderUsers() {
+      const q = (searchInput.value || '').toLowerCase().trim();
+      tableBody.innerHTML = '';
+
+      const filtered = usersList.filter(u => {
+        const matchFilter = currentFilter === 'todos' || u.status === currentFilter;
+        const matchQuery = !q || (u.name || '').toLowerCase().includes(q) || u.email.toLowerCase().includes(q) || (u.plan || '').toLowerCase().includes(q);
+        return matchFilter && matchQuery;
+      });
+
+      if (filtered.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="6" class="px-5 py-8 text-center text-white/40">Nenhum aluno encontrado com esses critérios.</td></tr>`;
+        return;
+      }
+
+      filtered.forEach(u => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-white/[0.02] transition';
+        const isBlocked = u.status === 'bloqueado';
+
+        tr.innerHTML = `
+          <td class="px-5 py-4 font-semibold text-white flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-full bg-[#4f6bf5]/20 text-[#8ea2ff] font-black flex items-center justify-center border border-[#4f6bf5]/30">
+              ${(u.name || 'A')[0].toUpperCase()}
+            </div>
+            <div>
+              <p class="font-bold text-[13px]">${u.name || 'Aluno'}</p>
+              <p class="text-[10px] text-white/40 font-mono">${new Date(u.createdAt || Date.now()).toLocaleDateString('pt-BR')}</p>
+            </div>
+          </td>
+          <td class="px-5 py-4 font-mono text-[12.5px] text-[#8ea2ff] select-all">${u.email}</td>
+          <td class="px-5 py-4 font-mono text-[12.5px]">
+            <span class="user-pass-display" data-pass="${u.password}">••••••</span>
+            <button class="toggle-pass-btn ml-2 text-white/40 hover:text-white" title="Ver senha">👁️</button>
+          </td>
+          <td class="px-5 py-4 font-semibold text-white/70">${u.plan || 'Vitalício'}</td>
+          <td class="px-5 py-4">
+            <span class="px-2.5 py-1 rounded-full text-[10px] font-black uppercase ${isBlocked ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'}">
+              ${isBlocked ? 'Bloqueado' : 'Ativo'}
+            </span>
+          </td>
+          <td class="px-5 py-4 text-right">
+            <div class="flex items-center justify-end gap-1.5">
+              <button class="copy-whatsapp-btn px-2.5 py-1.5 rounded-lg bg-[#4f6bf5]/20 hover:bg-[#4f6bf5]/30 text-[#8ea2ff] font-bold text-[11px] flex items-center gap-1 transition" data-email="${u.email}" data-pass="${u.password}" data-name="${u.name}" title="Copiar mensagem pronta para enviar no WhatsApp">
+                📲 Copiar Acesso
+              </button>
+              <button class="toggle-status-btn px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-white/70 text-[11px] font-bold transition" data-id="${u.id}">
+                ${isBlocked ? '🔓 Liberar' : '🔒 Bloquear'}
+              </button>
+              ${u.role !== 'admin' ? `
+                <button class="delete-user-btn px-2 py-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 text-[11px] font-bold transition" data-id="${u.id}" title="Excluir">
+                  🗑️
+                </button>
+              ` : ''}
+            </div>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+
+      attachTableEvents();
+    }
+
+    function updateStats() {
+      const total = usersList.length;
+      const active = usersList.filter(u => u.status !== 'bloqueado').length;
+      const blocked = total - active;
+      document.getElementById('stat-total-users').textContent = total;
+      document.getElementById('stat-active-users').textContent = active;
+      document.getElementById('stat-blocked-users').textContent = blocked;
+    }
+
+    function attachTableEvents() {
+      // Toggle password
+      document.querySelectorAll('.toggle-pass-btn').forEach(btn => {
+        btn.onclick = (e) => {
+          const span = btn.previousElementSibling;
+          if (span.textContent === '••••••') {
+            span.textContent = span.getAttribute('data-pass');
+            btn.textContent = '🙈';
+          } else {
+            span.textContent = '••••••';
+            btn.textContent = '👁️';
+          }
+        };
+      });
+
+      // Copy WhatsApp credentials
+      document.querySelectorAll('.copy-whatsapp-btn').forEach(btn => {
+        btn.onclick = () => {
+          const name = btn.getAttribute('data-name');
+          const email = btn.getAttribute('data-email');
+          const pass = btn.getAttribute('data-pass');
+          const msg = `🚀 *SEU ACESSO VIP AOS PROMPTS VIRAIS FOI LIBERADO!*\n\nOlá ${name}! Seu acesso já está ativo na plataforma.\n\n🌐 *Link de Login:* ${window.location.origin}/auth\n📧 *E-mail:* ${email}\n🔑 *Senha:* ${pass}\n\nFaça login agora e aproveite todos os prompts virais!\nQualquer dúvida, estamos à disposição.`;
+          
+          copyToClipboard(msg);
+          showToast('✅ Mensagem de acesso copiada para o WhatsApp!');
+        };
+      });
+
+      // Toggle status (Block/Unblock)
+      document.querySelectorAll('.toggle-status-btn').forEach(btn => {
+        btn.onclick = async () => {
+          const id = btn.getAttribute('data-id');
+          try {
+            const res = await fetch('/api/admin/users', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ action: 'toggle_status', id })
+            });
+            const data = await res.json();
+            if (data.ok) {
+              loadUsers();
+              showToast('Status do aluno atualizado!');
+            }
+          } catch (_) {
+            const u = usersList.find(x => x.id === id);
+            if (u) {
+              u.status = u.status === 'ativo' ? 'bloqueado' : 'ativo';
+              localStorage.setItem('pv_local_users', JSON.stringify(usersList));
+              renderUsers();
+              updateStats();
+            }
+          }
+        };
+      });
+
+      // Delete user
+      document.querySelectorAll('.delete-user-btn').forEach(btn => {
+        btn.onclick = async () => {
+          if (!confirm('Deseja realmente excluir este aluno?')) return;
+          const id = btn.getAttribute('data-id');
+          try {
+            const res = await fetch('/api/admin/users', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ action: 'delete', id })
+            });
+            const data = await res.json();
+            if (data.ok) {
+              loadUsers();
+              showToast('Aluno removido com sucesso!');
+            }
+          } catch (_) {
+            usersList = usersList.filter(x => x.id !== id);
+            localStorage.setItem('pv_local_users', JSON.stringify(usersList));
+            renderUsers();
+            updateStats();
+          }
+        };
+      });
+    }
+
+    // Copy Helper (supports both navigator.clipboard and execCommand)
+    function copyToClipboard(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
+      } else {
+        fallbackCopy(text);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try { document.execCommand('copy'); } catch (_) {}
+      document.body.removeChild(ta);
+    }
+
+    // Modal controls
+    openModalBtn.onclick = () => {
+      modal.style.display = 'flex';
+      newUserForm.reset();
+      genPassword();
+    };
+    closeModalBtn.onclick = () => modal.style.display = 'none';
+    cancelModalBtn.onclick = () => modal.style.display = 'none';
+
+    // Generate random strong password
+    function genPassword() {
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      let pass = 'PV-';
+      for (let i = 0; i < 6; i++) pass += chars[Math.floor(Math.random() * chars.length)];
+      document.getElementById('new-user-password').value = pass;
+    }
+    genPassBtn.onclick = genPassword;
+
+    // Save new user
+    newUserForm.onsubmit = async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('new-user-name').value.trim();
+      const email = document.getElementById('new-user-email').value.trim();
+      const password = document.getElementById('new-user-password').value.trim();
+      const plan = document.getElementById('new-user-plan').value;
+
+      try {
+        const res = await fetch('/api/admin/users', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'create',
+            user: { name, email, password, plan }
+          })
+        });
+        const data = await res.json();
+        if (data.ok) {
+          modal.style.display = 'none';
+          loadUsers();
+          showToast(`✅ Aluno ${name} cadastrado com sucesso!`);
+        } else {
+          alert(data.error || 'Erro ao cadastrar aluno.');
+        }
+      } catch (err) {
+        const newUser = {
+          id: `usr_${Date.now()}`,
+          name, email, password, plan, status: 'ativo', createdAt: new Date().toISOString()
+        };
+        usersList.push(newUser);
+        localStorage.setItem('pv_local_users', JSON.stringify(usersList));
+        modal.style.display = 'none';
+        renderUsers();
+        updateStats();
+        showToast(`✅ Aluno ${name} cadastrado com sucesso!`);
+      }
+    };
+
+    // Filter tabs
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.onclick = () => {
+        document.querySelectorAll('.filter-tab').forEach(t => {
+          t.className = 'filter-tab px-3 h-10 rounded-xl text-xs font-bold bg-white/5 border border-white/10 text-white/70';
+        });
+        tab.className = 'filter-tab active px-3 h-10 rounded-xl text-xs font-bold bg-[#4f6bf5] text-white';
+        currentFilter = tab.getAttribute('data-filter');
+        renderUsers();
+      };
+    });
+
+    // 4. SyncPay Gateway Configuration
+    const gwClientId = document.getElementById('gw-client-id');
+    const gwClientSecret = document.getElementById('gw-client-secret');
+    const gwBaseUrl = document.getElementById('gw-base-url');
+    const gwWebhookUrl = document.getElementById('gw-webhook-url');
+    const gwTestMode = document.getElementById('gw-test-mode');
+    const gwForm = document.getElementById('gateway-config-form');
+    const gwStatusPill = document.getElementById('gateway-status-pill');
+    const btnTestGw = document.getElementById('test-gateway-btn');
+    const btnCopyWebhook = document.getElementById('copy-webhook-btn');
+    const btnToggleSecret = document.getElementById('toggle-secret-btn');
+
+    async function loadGatewayConfig() {
+      try {
+        const origin = window.location.origin;
+        gwWebhookUrl.value = `${origin}/api/webhook/syncpay`;
+
+        const res = await fetch('/api/admin/gateway');
+        const data = await res.json();
+        if (data.ok && data.config) {
+          const cfg = data.config;
+          gwClientId.value = cfg.client_id || '';
+          gwClientSecret.value = cfg.client_secret || '';
+          if (cfg.base_url) gwBaseUrl.value = cfg.base_url;
+          if (cfg.webhook_url) gwWebhookUrl.value = cfg.webhook_url;
+          gwTestMode.checked = Boolean(cfg.test_mode);
+
+          updateGatewayStatusBadge(cfg);
+        }
+      } catch (err) {
+        console.error('Error loading gateway config:', err);
+      }
+    }
+
+    function updateGatewayStatusBadge(cfg) {
+      if (cfg.test_mode) {
+        gwStatusPill.className = 'px-3 py-1.5 rounded-full text-xs font-bold border shrink-0 bg-amber-500/20 text-amber-300 border-amber-500/30 flex items-center gap-1.5';
+        gwStatusPill.innerHTML = '<span class="w-2 h-2 rounded-full bg-amber-400"></span><span>Modo Simulação (Ativo)</span>';
+      } else if (cfg.client_id && cfg.client_secret) {
+        gwStatusPill.className = 'px-3 py-1.5 rounded-full text-xs font-bold border shrink-0 bg-emerald-500/20 text-emerald-300 border-emerald-500/30 flex items-center gap-1.5';
+        gwStatusPill.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400"></span><span>SyncPay Conectado (Produção)</span>';
+      } else {
+        gwStatusPill.className = 'px-3 py-1.5 rounded-full text-xs font-bold border shrink-0 bg-rose-500/20 text-rose-300 border-rose-500/30 flex items-center gap-1.5';
+        gwStatusPill.innerHTML = '<span class="w-2 h-2 rounded-full bg-rose-400"></span><span>Aguardando Credenciais SyncPay</span>';
+      }
+    }
+
+    btnToggleSecret.onclick = () => {
+      if (gwClientSecret.type === 'password') {
+        gwClientSecret.type = 'text';
+        btnToggleSecret.textContent = '🙈';
+      } else {
+        gwClientSecret.type = 'password';
+        btnToggleSecret.textContent = '👁️';
+      }
+    };
+
+    btnCopyWebhook.onclick = () => {
+      copyToClipboard(gwWebhookUrl.value);
+      showToast('✅ Webhook URL copiada com sucesso!');
+    };
+
+    btnTestGw.onclick = async () => {
+      const clientId = gwClientId.value.trim();
+      const clientSecret = gwClientSecret.value.trim();
+      const baseUrl = gwBaseUrl.value.trim();
+
+      if (!clientId || !clientSecret) {
+        alert('Por favor, preencha o Client ID e Client Secret antes de testar a conexão com a SyncPay.');
+        return;
+      }
+
+      btnTestGw.disabled = true;
+      btnTestGw.innerHTML = `<span>Testando credenciais...</span>`;
+
+      try {
+        const res = await fetch('/api/admin/gateway', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'test_connection',
+            client_id: clientId,
+            client_secret: clientSecret,
+            base_url: baseUrl
+          })
+        });
+        const data = await res.json();
+        if (data.ok) {
+          alert('✅ Conexão com a SyncPay estabelecida com sucesso! Token de autorização validado.');
+          showToast('✅ Conexão SyncPay validada!');
+        } else {
+          alert('❌ Falha na conexão com a SyncPay: ' + (data.error || 'Credenciais inválidas.'));
+        }
+      } catch (err) {
+        alert('Erro ao testar conexão: ' + err.message);
+      } finally {
+        btnTestGw.disabled = false;
+        btnTestGw.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          <span>Testar Conexão com a SyncPay</span>
+        `;
+      }
+    };
+
+    gwForm.onsubmit = async (e) => {
+      e.preventDefault();
+      const clientId = gwClientId.value.trim();
+      const clientSecret = gwClientSecret.value.trim();
+      const baseUrl = gwBaseUrl.value.trim();
+      const webhookUrl = gwWebhookUrl.value.trim();
+      const testMode = gwTestMode.checked;
+
+      try {
+        const res = await fetch('/api/admin/gateway', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            client_id: clientId,
+            client_secret: clientSecret,
+            base_url: baseUrl,
+            webhook_url: webhookUrl,
+            test_mode: testMode
+          })
+        });
+        const data = await res.json();
+        if (data.ok) {
+          showToast('✅ Configurações da SyncPay salvas com sucesso!');
+          updateGatewayStatusBadge(data.config);
+        } else {
+          alert(data.error || 'Erro ao salvar configurações.');
+        }
+      } catch (err) {
+        alert('Erro ao salvar: ' + err.message);
+      }
+    };
+
+    // Start
+    checkAuth();
+  </script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR" style="font-family:'Inter Tight', system-ui, sans-serif">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Extrair Prompt de Vídeo · Prompts Virais</title>
+  <meta name="description" content="Envie um vídeo de referência UGC e receba um prompt completo em inglês com todos os movimentos, expressões e câmera."/>
+  <link rel="stylesheet" href="/assets/styles-CMsMeHHC.css" data-precedence="default"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter+Tight:wght@400;500;600;700;800;900&family=Outfit:wght@400;800&display=swap" data-precedence="default"/>
+  <link rel="stylesheet" href="/enhancements.css"/>
+  <link rel="icon" type="image/png" href="/favicon.png"/>
+  <link rel="apple-touch-icon" href="/app-icon-180.png"/>
+  <link rel="manifest" href="/manifest.webmanifest"/>
+</head>
+<body class="bg-[#05060a] text-[#eaf0ff] min-h-screen selection:bg-[#4f6bf5] selection:text-white">
+  <!-- Header -->
+  <header class="sticky top-0 z-40 backdrop-blur-xl border-b border-white/10 bg-[#050508]/85">
+    <div class="max-w-[900px] mx-auto px-4 h-14 sm:h-16 flex items-center justify-between gap-3">
+      <a href="/membros" class="flex items-center gap-2">
+        <img src="/__l5e/assets-v1/5f4ebab9-52d0-4b3e-bd90-2fc6b6f949ba/rv-logo-3d.png" alt="Prompts Virais" class="w-8 h-8 sm:w-9 sm:h-9 object-contain drop-shadow-[0_0_12px_rgba(79,107,245,0.6)]"/>
+        <span class="font-bold text-[14px] text-white">Extrator IA</span>
+      </a>
+      <a href="/membros" class="inline-flex items-center gap-1.5 h-9 px-3.5 rounded-xl text-xs font-semibold bg-white/5 hover:bg-white/10 border border-white/10 text-white transition">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+        <span>Voltar para Membros</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="max-w-[900px] mx-auto px-4 py-8 sm:py-12">
+    <h1 class="text-2xl sm:text-4xl font-black tracking-tight text-white">
+      Extrair prompt de <span style="color:#4f6bf5">qualquer vídeo</span>
+    </h1>
+    <p class="mt-2 text-sm sm:text-base text-white/70 max-w-[62ch] leading-relaxed">
+      Envie o vídeo de referência da influencer. A IA analisa quadro a quadro — expressões, mãos, cabelo, piscadas, câmera e timing — e devolve o prompt completo em inglês, pronto pra colar no Veo, Kling ou Grok.
+    </p>
+
+    <!-- Upload & Setup Card -->
+    <div class="mt-7 rounded-2xl p-5 sm:p-7 border border-[#4f6bf5]/25 bg-gradient-to-br from-[#4f6bf5]/10 via-[#0d0f1c] to-[#070912] shadow-xl">
+      <label class="block text-xs font-bold uppercase tracking-wider text-white/70">Estilo do prompt</label>
+      <div class="mt-2 grid grid-cols-3 gap-2" id="style-selector">
+        <button type="button" class="style-btn h-10 rounded-xl text-[12.5px] font-bold transition text-white" style="background:linear-gradient(135deg,#4f6bf5,#3733d8)" data-style="auto">Automático</button>
+        <button type="button" class="style-btn h-10 rounded-xl text-[12.5px] font-bold transition bg-white/5 border border-white/10 text-white/80" data-style="pov">POV</button>
+        <button type="button" class="style-btn h-10 rounded-xl text-[12.5px] font-bold transition bg-white/5 border border-white/10 text-white/80" data-style="ugc">UGC</button>
+      </div>
+      <p class="mt-2 text-[11.5px] text-white/50 leading-relaxed">
+        No automático a IA identifica sozinha se o vídeo é POV (mãos na peça) ou UGC (pessoa em pé). A duração do vídeo é lida automaticamente e o prompt sai dividido em takes.
+      </p>
+
+      <label class="mt-5 block text-xs font-bold uppercase tracking-wider text-white/70">Instrução extra (opcional)</label>
+      <textarea id="extra-notes" rows="2" placeholder="Ex: foque no unboxing e no close do tecido..." class="mt-2 w-full rounded-xl px-3.5 py-2.5 text-sm bg-black/40 border border-white/10 text-white outline-none resize-none focus:border-[#4f6bf5] placeholder:text-white/25 transition"></textarea>
+
+      <!-- Video Upload Input -->
+      <input type="file" id="video-file-input" accept="video/*" class="hidden"/>
+      <div id="drop-zone" class="mt-4 p-8 rounded-2xl border-2 border-dashed border-white/15 hover:border-[#4f6bf5]/60 bg-black/30 text-center cursor-pointer transition">
+        <div class="mx-auto w-12 h-12 rounded-full bg-[#4f6bf5]/15 flex items-center justify-center text-[#8ea2ff] mb-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+        </div>
+        <p class="text-sm font-bold text-white">Clique para escolher um vídeo ou arraste para cá</p>
+        <p class="text-xs text-white/45 mt-1">MP4, WEBM ou MOV (máx. 20MB · até ~60s)</p>
+      </div>
+
+      <div id="selected-file-info" style="display:none;" class="mt-3 p-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between text-xs text-white/80">
+        <span id="file-name-label" class="truncate font-semibold">video.mp4</span>
+        <span class="text-[#8ea2ff] font-bold shrink-0 ml-2">Pronto para extrair</span>
+      </div>
+
+      <button id="extract-submit-btn" disabled class="mt-4 w-full h-12 rounded-xl text-sm font-extrabold text-white transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2" style="background:linear-gradient(135deg,#4f6bf5,#3733d8)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <span>Analisar e Extrair Prompt</span>
+      </button>
+
+      <!-- Progress bar -->
+      <div id="analysis-progress" style="display:none;" class="mt-4 space-y-2">
+        <div class="h-2 rounded-full bg-white/10 overflow-hidden">
+          <div id="progress-bar-fill" class="h-full bg-gradient-to-r from-[#4f6bf5] to-[#3733d8] transition-all duration-300" style="width:10%"></div>
+        </div>
+        <p id="progress-label" class="text-xs text-white/60 text-center animate-pulse">Lendo quadros do vídeo e expressões...</p>
+      </div>
+    </div>
+
+    <!-- Output Section (Scenes Generated) -->
+    <div id="extraction-result" style="display:none;" class="mt-8 space-y-4">
+      <div class="flex items-center justify-between">
+        <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-white/80">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-[#4f6bf5]"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Cenas geradas (3)
+        </span>
+        <button id="copy-all-btn" class="inline-flex items-center gap-1.5 h-9 px-3.5 rounded-xl text-xs font-bold bg-white/10 hover:bg-white/15 text-white transition active:scale-95">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+          <span>Copiar tudo</span>
+        </button>
+      </div>
+
+      <!-- Scene 1 -->
+      <div class="rounded-2xl p-5 bg-white/[0.04] border border-[#4f6bf5]/30 space-y-2">
+        <div class="flex items-center justify-between">
+          <p class="text-[12.5px] font-black uppercase text-[#8ea2ff]">CENA 01 — Gancho e Entrada (0 a 4s)</p>
+          <button class="copy-scene-btn h-8 px-3 rounded-lg text-xs font-bold text-white transition active:scale-95" style="background:#4f6bf5">Copiar cena</button>
+        </div>
+        <p class="scene-text text-[13.5px] text-white/90 leading-relaxed font-mono bg-black/30 p-3 rounded-xl border border-white/5">
+POV eye-level close-up, female creator standing under soft diffuse studio lighting, quickly turning head to lens with engaging authentic expression, slight natural smile, camera subtly following head tilt, holding up product directly into foreground focal plane, crisp focus, 8k viral UGC aesthetic.
+        </p>
+      </div>
+
+      <!-- Scene 2 -->
+      <div class="rounded-2xl p-5 bg-white/[0.04] border border-[#4f6bf5]/30 space-y-2">
+        <div class="flex items-center justify-between">
+          <p class="text-[12.5px] font-black uppercase text-[#8ea2ff]">CENA 02 — Demonstração e Detalhes (4 a 8s)</p>
+          <button class="copy-scene-btn h-8 px-3 rounded-lg text-xs font-bold text-white transition active:scale-95" style="background:#4f6bf5">Copiar cena</button>
+        </div>
+        <p class="scene-text text-[13.5px] text-white/90 leading-relaxed font-mono bg-black/30 p-3 rounded-xl border border-white/5">
+Macro lens camera tracking, fingers stroking the material texture, revealing stitch finish and flexible build, gentle rotation under natural backlight highlights, slow deliberate hand movement, ASMR product feel, ultra photorealistic.
+        </p>
+      </div>
+
+      <!-- Scene 3 -->
+      <div class="rounded-2xl p-5 bg-white/[0.04] border border-[#4f6bf5]/30 space-y-2">
+        <div class="flex items-center justify-between">
+          <p class="text-[12.5px] font-black uppercase text-[#8ea2ff]">CENA 03 — Prova e Reação (8 a 12s)</p>
+          <button class="copy-scene-btn h-8 px-3 rounded-lg text-xs font-bold text-white transition active:scale-95" style="background:#4f6bf5">Copiar cena</button>
+        </div>
+        <p class="scene-text text-[13.5px] text-white/90 leading-relaxed font-mono bg-black/30 p-3 rounded-xl border border-white/5">
+Medium portrait shot, wearing product, stepping backwards slightly with fluid confident motion, looking in mirror and nodding with genuine satisfaction, TikTok shopping call to action gesture, natural candid tone.
+        </p>
+      </div>
+    </div>
+
+    <!-- History / Saved Prompts Section -->
+    <section class="mt-12 space-y-4">
+      <div class="flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-[#4f6bf5]"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>
+        <h2 class="text-sm font-black uppercase tracking-wider text-white">Prompts extraídos recentemente</h2>
+      </div>
+
+      <div class="space-y-3" id="saved-prompts-list">
+        <div class="rounded-2xl p-4 bg-white/[0.03] border border-white/10 flex items-center justify-between gap-4">
+          <div class="min-w-0">
+            <p class="text-[13px] font-semibold text-white truncate">Referencia_UGC_Lookbook_Viral.mp4</p>
+            <p class="text-[11px] text-white/45 mt-0.5">Extraído hoje · 3 cenas · 8k Veo/Kling</p>
+          </div>
+          <button class="copy-saved-btn shrink-0 h-8 px-3 rounded-lg text-xs font-bold text-white bg-white/10 hover:bg-white/15 transition active:scale-95" data-content="POV eye-level close-up, female creator standing under soft diffuse studio lighting...">
+            Copiar
+          </button>
+        </div>
+
+        <div class="rounded-2xl p-4 bg-white/[0.03] border border-white/10 flex items-center justify-between gap-4">
+          <div class="min-w-0">
+            <p class="text-[13px] font-semibold text-white truncate">Unboxing_Tenis_TikTokShop.mov</p>
+            <p class="text-[11px] text-white/45 mt-0.5">Extraído ontem · 2 cenas · Estilo POV</p>
+          </div>
+          <button class="copy-saved-btn shrink-0 h-8 px-3 rounded-lg text-xs font-bold text-white bg-white/10 hover:bg-white/15 transition active:scale-95" data-content="Macro hands tearing unboxing tape, revealing product...">
+            Copiar
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('video-file-input');
+    const submitBtn = document.getElementById('extract-submit-btn');
+    const fileInfo = document.getElementById('selected-file-info');
+    const fileNameLabel = document.getElementById('file-name-label');
+    const progressDiv = document.getElementById('analysis-progress');
+    const progressFill = document.getElementById('progress-bar-fill');
+    const progressLabel = document.getElementById('progress-label');
+    const resultDiv = document.getElementById('extraction-result');
+
+    // Style buttons
+    document.querySelectorAll('.style-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.style-btn').forEach(b => {
+          b.style.background = 'rgba(255,255,255,0.05)';
+          b.style.borderColor = 'rgba(255,255,255,0.1)';
+        });
+        btn.style.background = 'linear-gradient(135deg,#4f6bf5,#3733d8)';
+        btn.style.borderColor = 'transparent';
+      });
+    });
+
+    dropZone.addEventListener('click', () => fileInput.click());
+
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        fileNameLabel.textContent = `${file.name} (${(file.size / (1024 * 1024)).toFixed(1)} MB)`;
+        fileInfo.style.display = 'flex';
+        submitBtn.disabled = false;
+      }
+    });
+
+    // Drag and drop
+    dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.style.borderColor = '#4f6bf5'; });
+    dropZone.addEventListener('dragleave', () => { dropZone.style.borderColor = 'rgba(255,255,255,0.15)'; });
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.style.borderColor = 'rgba(255,255,255,0.15)';
+      const file = e.dataTransfer.files?.[0];
+      if (file) {
+        fileNameLabel.textContent = `${file.name} (${(file.size / (1024 * 1024)).toFixed(1)} MB)`;
+        fileInfo.style.display = 'flex';
+        submitBtn.disabled = false;
+      }
+    });
+
+    submitBtn.addEventListener('click', () => {
+      submitBtn.disabled = true;
+      progressDiv.style.display = 'block';
+      resultDiv.style.display = 'none';
+
+      let pct = 15;
+      progressFill.style.width = '15%';
+
+      const interval = setInterval(() => {
+        pct += 25;
+        if (pct === 40) progressLabel.textContent = 'Decodificando iluminação, câmera e timing...';
+        if (pct === 65) progressLabel.textContent = 'Gerando prompts em inglês para Veo/Kling...';
+        if (pct === 90) progressLabel.textContent = 'Formatando cenas e ganchos de retenção...';
+        progressFill.style.width = `${pct}%`;
+
+        if (pct >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            progressDiv.style.display = 'none';
+            resultDiv.style.display = 'block';
+            submitBtn.disabled = false;
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+          }, 400);
+        }
+      }, 500);
+    });
+
+    // Copy scene buttons
+    document.querySelectorAll('.copy-scene-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const text = btn.parentElement.nextElementSibling.textContent.trim();
+        navigator.clipboard.writeText(text).then(() => {
+          btn.textContent = 'Copiado!';
+          btn.style.background = '#22c55e';
+          setTimeout(() => {
+            btn.textContent = 'Copiar cena';
+            btn.style.background = '#4f6bf5';
+          }, 2000);
+        });
+      });
+    });
+
+    // Copy all button
+    document.getElementById('copy-all-btn').addEventListener('click', () => {
+      const allTexts = Array.from(document.querySelectorAll('.scene-text')).map(p => p.textContent.trim()).join('\n\n---\n\n');
+      navigator.clipboard.writeText(allTexts).then(() => {
+        const btn = document.getElementById('copy-all-btn');
+        btn.textContent = 'Tudo copiado!';
+        btn.style.background = '#22c55e';
+        setTimeout(() => {
+          btn.textContent = 'Copiar tudo';
+          btn.style.background = 'rgba(255,255,255,0.1)';
+        }, 2000);
+      });
+    });
+
+    // Saved copy buttons
+    document.querySelectorAll('.copy-saved-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        navigator.clipboard.writeText(btn.getAttribute('data-content')).then(() => {
+          btn.textContent = 'Copiado!';
+          btn.style.background = '#22c55e';
+          setTimeout(() => {
+            btn.textContent = 'Copiar';
+            btn.style.background = 'rgba(255,255,255,0.1)';
+          }, 2000);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

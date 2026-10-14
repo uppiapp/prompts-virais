@@ -1,0 +1,19 @@
+{
+  "name": "prompts-virais-clone",
+  "version": "1.0.0",
+  "description": "Clone completo e idêntico do site Prompts Virais (https://promptsviraisbr.lovable.app/) com todos os vídeos (VSL, vitrine, carrossel), imagens, estilos e rotas.",
+  "main": "serve.js",
+  "scripts": {
+    "start": "node serve.js",
+    "test": "node test_server.js"
+  },
+  "keywords": [
+    "clone",
+    "promptsvirais",
+    "vsl",
+    "landing-page",
+    "tiktok-shop"
+  ],
+  "author": "",
+  "license": "ISC"
+}

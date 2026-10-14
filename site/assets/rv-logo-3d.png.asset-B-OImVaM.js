@@ -1,0 +1,1 @@
+import{c as e}from"./x-vWCyyCJH.js";const s=[["path",{d:"M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719",key:"1sd12s"}]],c=e("message-circle",s),o="/__l5e/assets-v1/5f4ebab9-52d0-4b3e-bd90-2fc6b6f949ba/rv-logo-3d.png",r={url:o};export{c as M,r};
